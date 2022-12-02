@@ -1,4 +1,4 @@
-# DSC180A-Methodology-5
+# DSC180A-Final
 
 ## Datasets
 NYT: This dataset includes news articles and 5 coarse-grained label categories, each with a set of seedwords. A pickle file provides sentences and their corresponding labels.
