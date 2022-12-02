@@ -20,7 +20,7 @@ def cleaning(sentence):
     cleaned = [token for token in tokens if token not in stop_words]
     return " ".join(cleaned)
 
-def tfidf(word):
+def tfidf(data,word):
     sentence = data['sentence']
     idf = np.log(len(sentence)/sentence.str.contains(word).sum())
     result = []
@@ -33,7 +33,7 @@ def preprocessing(sentence):
     tokens = sentence.split(" ")
     return [token for token in tokens if token!="" and token != " "]
 
-def get_vectors_per_label(filename):
+def get_vectors_per_label(model,filename):
     f = open(filename)
     seeds = json.load(f)
     vector_per_label = []
