@@ -41,11 +41,11 @@ model.save("word2vec.model")
 model = Word2Vec.load("word2vec.model")
 model.train(features, total_examples=len(data), epochs=20)
 vector_per_label = get_vectors_per_label(model, 'test/testdata/seedwords.json')
-vector_per_doc = get_vector_per_doc(features)
+vector_per_doc = get_vector_per_doc(model, features)
 
 f = open('test/testdata/seedwords.json')
 seeds = json.load(f)
-prediction_word2vec = predict_word2vec(vector_per_doc, vector_per_label)
+prediction_word2vec = predict_word2vec(seeds, vector_per_doc, vector_per_label)
 data["prediction_word2vec"] = prediction_word2vec
 metrics.f1_score(data["label"], data["prediction_word2vec"], average="micro")
 metrics.f1_score(data["label"], data["prediction_word2vec"], average="macro")

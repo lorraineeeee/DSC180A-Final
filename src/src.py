@@ -46,7 +46,7 @@ def get_vectors_per_label(model,filename):
         vector_per_label.append(total)
     return vector_per_label
 
-def get_vector_per_doc(feature):
+def get_vector_per_doc(model, feature):
     vector_per_doc = []
     for feat in feature:
         lst = []
@@ -57,7 +57,7 @@ def get_vector_per_doc(feature):
         vector_per_doc.append(total)
     return vector_per_doc
 
-def predict_word2vec(vector_per_doc, vector_per_label):
+def predict_word2vec(seeds, vector_per_doc, vector_per_label):
     predictions = []
     labels = list(seeds.keys())
     for doc in vector_per_doc:
