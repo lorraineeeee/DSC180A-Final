@@ -7,7 +7,7 @@ NYT: This dataset includes news articles and 5 coarse-grained label categories, 
 
 Download the data from https://github.com/dheeraj7596/ConWea/tree/master/data.
 
-Edit the file: config/data-params.json to include the path/location of the raw data
+Edit config/data-params.json to include the path/location of the raw data
 
 ## Word2Vec
 Data cleaning and preprocessing: Change all sentences to be lower-cased. Remove punctuation, trailing white spaces and stop words using NLTK. 
@@ -24,3 +24,6 @@ Data cleaning and preprocessing: Change all sentences to be lower-cased. Remove 
 TF-IDF calculation: For each seedword, calculate its TF-IDF value with respect to a specific document using tfidf(t,d) = tf(t,d) * idf(t), where tf(t,d)= the likelihood of the term appearing in the document, and idf(t)= log(number of documents/number of documents t appears). For each document, sum up all TF-IDF values for all seedwords within a label, and assign the document with the label that has the highest TF-IDF sum.
 
 Micro/Macro F1 calculation: Use sklearn.metrics.f1_score to derive Micro and Macro F1 scores, respectively.
+
+## How to run the project
+First run pip install -r requirements.txt to install all the the required packages.
