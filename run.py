@@ -31,6 +31,10 @@ if (test):
     with open('config/data-params.json') as fh:
         data_params = json.load(fh)
     seedwords = data_params["test"]
+else:
+    with open('config/data-params.json') as fh:
+        data_params = json.load(fh)
+    seedwords = data_params["all"]
 f = open(seedwords)
 seeds = json.load(f)
 result = pd.DataFrame()
