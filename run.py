@@ -18,12 +18,20 @@ from src.data.make_dataset import *
 from src.features.build_features import * 
 from src.models.predict_model import * 
 from src.models.train_model import *
+import sys
 
 data = make_dataset('test/testdata/df.pkl')
   
 data["sentence"]=data["sentence"].apply(cleaning)
-
-f = open('test/testdata/seedwords.json')
+test = True
+if (len(sys.argv) > 1 and sys.argv[1] != "test"):
+    test = False
+seedwords = ""
+if (test):
+    with open('config/data-params.json') as fh:
+        data_params = json.load(fh)
+    seedwords = data_params["test"]
+f = open(seedwords)
 seeds = json.load(f)
 result = pd.DataFrame()
 for key, value in seeds.items():
@@ -39,10 +47,10 @@ print(metrics.f1_score(data["label"], data["prediction"], average="macro"))
 
 features = data["sentence"].apply(preprocessing)
 model = train(data, features)
-vector_per_label = get_vectors_per_label(model, 'test/testdata/seedwords.json')
+vector_per_label = get_vectors_per_label(model, seedwords)
 vector_per_doc = get_vector_per_doc(model, features)
 
-f = open('test/testdata/seedwords.json')
+f = open(seedwords)
 seeds = json.load(f)
 prediction_word2vec = predict_word2vec(seeds, vector_per_doc, vector_per_label)
 data["prediction_word2vec"] = prediction_word2vec
