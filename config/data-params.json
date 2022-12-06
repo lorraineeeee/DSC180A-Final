@@ -1,0 +1,4 @@
+{
+    "test": "test/testdata/seedwords.json",
+    "all": "test/testdata/seedwords.json"
+}
