@@ -5,6 +5,10 @@ NYT: This dataset includes news articles and 5 coarse-grained label categories, 
 
 20News: This dataset includes news group and 7 coarse-grained label categories, each with a set of seedwords. Similarly, a pickle file provides sentences and their corresponding labels. 
 
+Download the data from https://github.com/dheeraj7596/ConWea/tree/master/data.
+
+Edit the file: config/data-params.json to include the path/location of the raw data
+
 ## Word2Vec
 Data cleaning and preprocessing: Change all sentences to be lower-cased. Remove punctuation, trailing white spaces and stop words using NLTK. 
 
