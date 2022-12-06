@@ -14,10 +14,12 @@ nltk.download('punkt')
 from nltk.corpus import stopwords
 import re
 from numpy.linalg import norm
-from src.src import * 
+from src.data.make_dataset import * 
+from src.features.build_features import * 
+from src.models.predict_model import * 
+from src.models.train_model import *
 
-with open('test/testdata/df.pkl', 'rb') as f:
-    data = pickle.load(f)
+data = make_dataset('test/testdata/df.pkl')
   
 data["sentence"]=data["sentence"].apply(cleaning)
 
@@ -32,14 +34,11 @@ for key, value in seeds.items():
 
 data["prediction"] = result.idxmax(1)
 
-metrics.f1_score(data["label"], data["prediction"], average="micro")
-metrics.f1_score(data["label"], data["prediction"], average="macro")
+print(metrics.f1_score(data["label"], data["prediction"], average="micro"))
+print(metrics.f1_score(data["label"], data["prediction"], average="macro"))
 
 features = data["sentence"].apply(preprocessing)
-model = Word2Vec(sentences=features, window=5, min_count=1, workers=4)
-model.save("word2vec.model")
-model = Word2Vec.load("word2vec.model")
-model.train(features, total_examples=len(data), epochs=20)
+model = train(data, features)
 vector_per_label = get_vectors_per_label(model, 'test/testdata/seedwords.json')
 vector_per_doc = get_vector_per_doc(model, features)
 
@@ -47,5 +46,5 @@ f = open('test/testdata/seedwords.json')
 seeds = json.load(f)
 prediction_word2vec = predict_word2vec(seeds, vector_per_doc, vector_per_label)
 data["prediction_word2vec"] = prediction_word2vec
-metrics.f1_score(data["label"], data["prediction_word2vec"], average="micro")
-metrics.f1_score(data["label"], data["prediction_word2vec"], average="macro")
+print(metrics.f1_score(data["label"], data["prediction_word2vec"], average="micro"))
+print(metrics.f1_score(data["label"], data["prediction_word2vec"], average="macro"))
