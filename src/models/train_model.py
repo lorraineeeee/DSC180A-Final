@@ -14,7 +14,7 @@ from nltk.corpus import stopwords
 import re
 from numpy.linalg import norm
 
-def train(data, features, window=5, min_count=1, workers=4, epochs=20)
+def train(data, features, window=5, min_count=1, workers=4, epochs=20):
     model = Word2Vec(sentences=features, window = window, min_count= min_count, workers=workers)
     model.save("word2vec.model")
     model = Word2Vec.load("word2vec.model")
